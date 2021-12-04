@@ -2,7 +2,9 @@
   (:require [clojure.string :as str]))
 
 (defn- parse-command [[prev-h prev-d] [direction amount]]
-               [(+ prev-h (Integer/parseInt amount)) 0])
+  (case direction
+    "forward" [(+ prev-h (Integer/parseInt amount)) 0]
+    "down" [0 (+ prev-h (Integer/parseInt amount))]))
 
 (defn final-position
   "Returns tuple of final horizontal position and depth"
