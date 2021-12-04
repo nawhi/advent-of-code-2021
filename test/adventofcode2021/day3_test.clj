@@ -4,9 +4,10 @@
 
 (deftest epsilon-test
   (testing "epsilon calculation"
-    (is (= "0" (epsilon ["0"])))
-    (is (= "1" (epsilon ["1"])))
-    (is (= "1" (epsilon ["0" "1" "1"])))
-    (is (= "0" (epsilon ["0" "0" "1" "0" "1"])))
-    (is (= "01" (epsilon ["01" "10" "01" "01"])))
+    (is (= 0 (epsilon ["0"])))
+    (is (= 1 (epsilon ["1"])))
+    (is (= 1 (epsilon ["0" "1" "1"])))
+    (is (= 0 (epsilon ["0" "0" "1" "0" "1"])))
+    (is (= 2r01 (epsilon ["01" "10" "01" "01"])))
+    (is (= 2r011 (epsilon ["011" "101" "011" "010"])))
     ))

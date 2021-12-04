@@ -13,6 +13,6 @@
   (let [num-length (count (first numbers))]
     (loop [i 0 res ""]
       (if (= i num-length)
-        res
+        (Integer/parseInt res 2)
         (let [bit-this-pos (least-common-bit (map #(subs % i (+ i 1)) numbers))]
           (recur (+ i 1) (str res bit-this-pos)))))))
