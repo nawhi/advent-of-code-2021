@@ -1,6 +1,7 @@
 (ns adventofcode2021.day3-test
   (:require [clojure.test :refer :all]
-            [adventofcode2021.day3 :refer :all]))
+            [adventofcode2021.day3 :refer :all]
+            [adventofcode2021.utils :refer :all]))
 
 (deftest epsilon-test
   (testing "epsilon calculation"
@@ -21,4 +22,7 @@
 
   (testing "epsilon * gamma"
     (let [input ["00100" "11110" "10110" "10111" "10101" "01111" "00111" "11100" "10000" "11001" "00010" "01010"]]
-      (is (= 198 (power-consumption input))))))
+      (is (= 198 (power-consumption input)))))
+
+  (testing "puzzle 1"
+    (is (= 12345 (power-consumption (puzzle-input "3.1"))))))
