@@ -2,11 +2,15 @@
   (:require [clojure.string :as str]))
 
 (defn- parse-command [[prev-h prev-d] [direction amount]]
-  (case direction
-    "forward" [(+ prev-h (Integer/parseInt amount)) 0]
-    "down" [0 (+ prev-h (Integer/parseInt amount))]))
+  (let [val (Integer/parseInt amount)]
+    (case direction
+      "forward" [(+ prev-h val) 0]
+      "down" [0 (+ prev-d val)])))
 
 (defn final-position
   "Returns tuple of final horizontal position and depth"
   [commands]
-  (parse-command [0 0] (str/split (first commands) #" ")))
+  (reduce
+    #(parse-command %1 (str/split %2 #" "))
+    [0 0]
+    commands))
