@@ -13,7 +13,6 @@
         zeroes (get group false)]
     (if (> (count ones) (count zeroes)) "0" "1")))
 
-
 (defn- decode
   "Returns number with the least common bit at each position for each input number"
   [reducer numbers]
@@ -27,4 +26,5 @@
 (def epsilon (partial decode least-common-bit))
 (def gamma (partial decode most-common-bit))
 
-
+(defn power-consumption [numbers]
+  (* (epsilon numbers) (gamma numbers)))
