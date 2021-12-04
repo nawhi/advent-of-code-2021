@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [adventofcode2021.day1 :refer :all]))
 
-(deftest a-test
+(deftest test
   (testing "How many measurements are larger than the previous"
     (is (= 1 (count-measurement-increase [1 2])))
     (is (= 5 (count-measurement-increase [1 2 3 4 6 8])))
