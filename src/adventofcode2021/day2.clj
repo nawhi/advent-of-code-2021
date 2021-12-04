@@ -1,12 +1,12 @@
 (ns adventofcode2021.day2
   (:require [clojure.string :as str]))
 
-(defn- parse-command [[prev-h prev-d] [direction amount]]
+(defn- parse-command [[x y] [direction amount]]
   (let [val (Integer/parseInt amount)]
     (case direction
-      "forward" [(+ prev-h val) prev-d]
-      "up" [prev-h (- prev-d val)]
-      "down" [prev-h (+ prev-d val)])))
+      "forward" [(+ x val) y]
+      "up" [x (- y val)]
+      "down" [x (+ y val)])))
 
 (defn final-position
   "Returns tuple of final horizontal position and depth"
