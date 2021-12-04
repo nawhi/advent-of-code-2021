@@ -25,4 +25,4 @@
       (is (= 198 (power-consumption input)))))
 
   (testing "puzzle 1"
-    (is (= 12345 (power-consumption (puzzle-input "3.1"))))))
+    (is (= 3959450 (power-consumption (puzzle-input "3.1"))))))
