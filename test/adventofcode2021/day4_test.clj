@@ -1,9 +1,11 @@
 (ns adventofcode2021.day4-test
   (:require [clojure.test :refer :all]))
 
+(defn row-has-won [row]
+  (every? (fn [[_ drawn]] drawn) row))
+
 (defn has-won [board]
-  (let [[row] board]
-    (every? (fn [[_ drawn]] drawn) row)))
+  (boolean (some #(row-has-won %) board)))
 
 (deftest has-board-won
   (testing "1 entry"
@@ -14,8 +16,11 @@
     (is (= true (has-won [[[1 true] [2 true]]])))
     (is (= false (has-won [[[1 true] [2 false]]])))
     )
-  ;(testing "diagonal is not a win"
-  ;  (is (= false (has-won [[[1 true] [2 false]]
-  ;                         [[3 false] [4 true]]])))
-  ;  )
+  (testing "diagonal is not a win"
+    (is (= false (has-won [[[1 true] [2 false]]
+                           [[3 false] [4 true]]])))
+    )
+  ;(testing "second row can win"
+  ;  (is (= true (has-won [[[1 true] [2 false]]
+  ;                        [[3 true] [4 true]]]))))
   )
