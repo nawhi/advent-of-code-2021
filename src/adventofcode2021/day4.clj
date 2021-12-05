@@ -1,4 +1,5 @@
-(ns adventofcode2021.day4)
+(ns adventofcode2021.day4
+  (:require [clojure.string :as string]))
 
 (defn- transpose [m] (apply mapv vector m))
 
@@ -21,3 +22,19 @@
     (if (win? board draws-set)
       (calc-score board draws-set (last draws))
       nil)))
+
+(defn- map-2d [fn coll]
+  (map #(map fn %) coll))
+
+(defn- parse-board [raw-board]
+  (let [split (string/split-lines raw-board)
+        raw-nums (map #(string/split % #"[^\d]+") split)
+        parsed-nums (map-2d identity raw-nums)]
+    parsed-nums))
+
+(defn score-winning-board [raw]
+  (let [[raw-numbers & raw-boards] (string/split raw #"\n\n")
+        numbers (map #(Integer/parseInt %) (string/split raw-numbers #","))
+        boards (map #(parse-board %) raw-boards)]
+    (println numbers)
+    (println (first boards))))

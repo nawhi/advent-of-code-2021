@@ -1,6 +1,7 @@
 (ns adventofcode2021.day4-test
   (:require [clojure.test :refer :all]
-            [adventofcode2021.day4 :refer :all]))
+            [adventofcode2021.day4 :refer :all]
+            [adventofcode2021.utils :refer :all]))
 
 
 
@@ -24,3 +25,7 @@
                         [22 11 13 6 5]
                         [2 0 12 3 7]]
                        [7 4 9 5 11 17 23 2 0 14 21 24])))))
+
+(deftest score-winning-board-test
+  (testing "scores the board that would win first"
+    (is (= 4512 (score-winning-board (raw-puzzle-input "4.1.example"))))))
