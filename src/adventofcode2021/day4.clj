@@ -1,11 +1,12 @@
 (ns adventofcode2021.day4)
 
-(defn- row-has-won [board]
-  (some #(every? (fn [[_ drawn]] drawn) %) board))
-
 (defn- transpose [m] (apply mapv vector m))
 
-(defn has-won [board]
-  (let [board-2d (to-array-2d board)]
-    (boolean (or (row-has-won board-2d)
-                 (row-has-won (transpose board-2d))))))
+(defn- row-win? [board draws]
+  (let [[row] board]
+    (every? #(contains? draws %) row)))
+
+(defn win? [board draws]
+  (or (row-win? board draws) (row-win? (transpose board) draws)))
+
+  (defn score [board draws] (if (win? board (set draws)) 0 nil))
