@@ -10,8 +10,11 @@
   (or (row-win? board draws) (row-win? (transpose board) draws)))
 
 (defn- calc-score [board draws last-drawn]
-  (let [undrawn (filter #(not (contains? draws %)) (flatten board))]
-    (* (reduce + undrawn) last-drawn)))
+  (->> board
+       (flatten)
+       (filter #(not (contains? draws %)))
+       (reduce +)
+       (* last-drawn)))
 
 (defn score [board draws]
   (let [draws-set (set draws)]
