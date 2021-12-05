@@ -29,3 +29,7 @@
 (deftest score-winning-board-test
   (testing "scores the board that would win first"
     (is (= 4512 (score-winning-board (raw-puzzle-input "4.1.example"))))))
+
+(deftest puzzle-test
+  (testing "passes the puzzle 1"
+    (is (= 38913 (score-winning-board (raw-puzzle-input "4.1"))))))

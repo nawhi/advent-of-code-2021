@@ -40,7 +40,6 @@
     (loop [i 1]
       (let [nums (take i numbers)
             winners (filter #(some? (score % nums)) boards)]
-        (println winners)
         (if (not-empty winners)
           (score (first winners) nums)
           (recur (+ i 1)))))))
