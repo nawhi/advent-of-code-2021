@@ -3,8 +3,6 @@
             [adventofcode2021.day4 :refer :all]
             [adventofcode2021.utils :refer :all]))
 
-
-
 (deftest score-test
   (testing "non winning board has score of nil"
     (is (nil? (score [[1]] [])))

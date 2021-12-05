@@ -33,14 +33,17 @@
        (filter-rows #(not (.isEmpty %)))
        (map-2d #(Integer/parseInt %))))
 
+(defn- parse-input [input]
+  (let [[raw-numbers & raw-boards] (string/split input #"\n\n")]
+    {:numbers (map #(Integer/parseInt %) (string/split raw-numbers #","))
+     :boards  (map #(parse-board %) raw-boards)}))
+
 (defn score-winning-board [raw]
-  (let [[raw-numbers & raw-boards] (string/split raw #"\n\n")
-        numbers (map #(Integer/parseInt %) (string/split raw-numbers #","))
-        boards (map #(parse-board %) raw-boards)]
+  (let [{:keys [numbers boards]} (parse-input raw)]
     (loop [i 1]
       (let [nums (take i numbers)
-            winners (filter #(some? (score % nums)) boards)]
-        (if (not-empty winners)
-          (score (first winners) nums)
+            scores (->> boards (map #(score % nums)) (filter some?))]
+        (if (not-empty scores)
+          (first scores)
           (recur (+ i 1)))))))
 
