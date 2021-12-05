@@ -23,18 +23,25 @@
       (calc-score board draws-set (last draws))
       nil)))
 
-(defn- map-2d [fn coll]
-  (map #(map fn %) coll))
+(defn- map-2d [fn coll] (map #(map fn %) coll))
+
+(defn- filter-rows [fn coll] (map #(filter fn %) coll))
 
 (defn- parse-board [raw-board]
-  (let [split (string/split-lines raw-board)
-        raw-nums (map #(string/split % #"[^\d]+") split)
-        parsed-nums (map-2d identity raw-nums)]
-    parsed-nums))
+  (->> (string/split-lines raw-board)
+       (map #(string/split % #"[^\d]+"))
+       (filter-rows #(not (.isEmpty %)))
+       (map-2d #(Integer/parseInt %))))
 
 (defn score-winning-board [raw]
   (let [[raw-numbers & raw-boards] (string/split raw #"\n\n")
         numbers (map #(Integer/parseInt %) (string/split raw-numbers #","))
         boards (map #(parse-board %) raw-boards)]
-    (println numbers)
-    (println (first boards))))
+    (loop [i 1]
+      (let [nums (take i numbers)
+            winners (filter #(some? (score % nums)) boards)]
+        (println winners)
+        (if (not-empty winners)
+          (score (first winners) nums)
+          (recur (+ i 1)))))))
+
