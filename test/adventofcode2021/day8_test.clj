@@ -1,20 +1,7 @@
 (ns adventofcode2021.day8-test
   (:require [clojure.test :refer :all]
-            [clojure.string :as string]
+            [adventofcode2021.day8 :refer :all]
             [adventofcode2021.utils :refer :all]))
-
-(defn debug [x] (println x) x)
-
-(defn frequency-of-1478 [lines]
-  "returns number of times a 2, 3, 4 or 7-character word appeared after the bar"
-  (println (string/join ", " lines))
-  (->> lines
-       (map #(last (string/split % #" \| ")))
-       (map #(string/split % #" "))
-       (flatten)
-       (filter #(contains? #{2 3 4 7} (count %)))
-       (count)
-       ))
 
 (deftest day8
   (are [input expected]
