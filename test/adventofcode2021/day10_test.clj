@@ -45,5 +45,4 @@
                  "<{([{{}}[<[[[<>{}]]]>[]]"]]
       (is (= 26397 (syntax-score lines)))))
   (testing "puzzle 1"
-    (is (= 318099 (syntax-score (puzzle-input "10.1")))))
-  )
+    (is (= 318099 (syntax-score (puzzle-input "10.1"))))))

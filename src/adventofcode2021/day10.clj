@@ -1,20 +1,17 @@
 (ns adventofcode2021.day10)
 
-(def is-open-paren (partial contains? #{\( \{ \[ \<}))
-(def is-close-paren (partial contains? #{\) \} \] \>}))
-(def match-paren (partial get {\[ \] \( \) \{ \} \< \>}))
+(def close? (partial contains? #{\) \} \] \>}))
+(def match (partial get {\[ \] \( \) \{ \} \< \>}))
 (def score (partial get {\) 3 \] 57 \} 1197 \> 25137}))
 
 (defn- parse-internal [line stack]
-  (if (empty? line)
-    nil
-    (let [[c] line expected (last stack)]
-      (if (is-close-paren c)
-        (if (= expected c)
-          (parse-internal (subs line 1) (pop stack))
-          c)
-        (parse-internal (subs line 1) (conj stack (match-paren c)))))))
-
+  (let [c (first line) expected (last stack)]
+    (cond
+      (nil? c) nil
+      (close? c) (if (= expected c)
+                   (parse-internal (subs line 1) (pop stack))
+                   c)
+      :else (parse-internal (subs line 1) (conj stack (match c))))))
 
 (defn parse [line] (parse-internal line []))
 
