@@ -2,7 +2,21 @@
   (:require [clojure.test :refer :all]
             [adventofcode2021.day10 :refer :all]))
 
-(deftest first-illegal-character-test
+(deftest syntax-score-test
   (are [string expected]
-    (= (first-illegal-character string) expected)
-    "(]" \]))
+    (= (parse string) expected)
+    ")" \)
+    "]" \]
+    "}" \}
+    ">" \>
+    "()" nil
+    "{}" nil
+    "[]" nil
+    "<>" nil
+    "[)" \)
+    "(]" \]
+    "[}" \}
+    "{>" \>
+    "(())" nil
+    "(()]" \]
+    ))
