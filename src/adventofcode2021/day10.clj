@@ -5,13 +5,14 @@
 (def score (partial get {\) 3 \] 57 \} 1197 \> 25137}))
 
 (defn- parse-internal [line stack]
-  (let [c (first line) expected (last stack)]
-    (cond
-      (nil? c) nil
-      (close? c) (if (= expected c)
-                   (parse-internal (subs line 1) (pop stack))
-                   c)
-      :else (parse-internal (subs line 1) (conj stack (match c))))))
+  (loop [line line stack stack]
+    (let [c (first line) expected (peek stack)]
+      (cond
+        (nil? c) nil
+        (close? c) (if (not (= expected c))
+                     c
+                     (recur (subs line 1) (pop stack)))
+        :else (recur (subs line 1) (conj stack (match c)))))))
 
 (defn parse [line] (parse-internal line []))
 
