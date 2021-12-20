@@ -1,10 +1,5 @@
-(ns adventofcode2021.day9)
-
-(defn get2d
-  ([arr2d x y] (try
-                 (nth (nth arr2d y) x)
-                 (catch Exception _ nil)))
-  ([arr2d x y default] (or (get2d arr2d x y) default)))
+(ns adventofcode2021.day9
+  (:require [adventofcode2021.utils :refer [get2d]]))
 
 (def NEIGHBOURS [[0 1]
                  [-1 0] [1 0]
