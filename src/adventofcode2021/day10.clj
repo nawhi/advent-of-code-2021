@@ -31,3 +31,20 @@
     (if (char? result)
       nil
       (string/join "" (reverse result)))))
+
+(def score-2 (partial get {\) 1 \] 2 \} 3 \> 4}))
+
+(defn score-autocomplete-string [str]
+  (->> str
+       (map score-2)
+       (reduce #(+ (* %1 5) %2))))
+
+(defn middle-value [v] (nth v (quot (count v) 2)))
+
+(defn autocomplete-score [lines]
+  (->> lines
+       (map autocomplete)
+       (filter some?)
+       (map score-autocomplete-string)
+       (sort)
+       (middle-value)))
