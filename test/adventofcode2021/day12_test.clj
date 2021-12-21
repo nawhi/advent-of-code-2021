@@ -23,8 +23,8 @@
                              "yw"    #{"DG" "MN" "XN"}}
       ))
   (testing "find all routes through a cave system"
-    (are [graph routes]
-      (is (= (find-routes graph) routes))
+    (are [graph expected]
+      (is (= (routes graph) expected))
       {"start" #{"end"}} #{["start" "end"]}
       ))
   )

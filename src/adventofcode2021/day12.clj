@@ -8,11 +8,11 @@
           {}
           lines))
 
-(defn find-routes-from [graph node route]
+(defn routes- [graph node route]
   (if (= node "end")
     route
     (for [child (get graph node)]
-      (find-routes-from graph child (conj route child)))))
+      (routes- graph child (conj route child)))))
 
-(defn find-routes [graph]
-  (set (find-routes-from graph "start" ["start"])))
+(defn routes [graph]
+  (set (routes- graph "start" ["start"])))
