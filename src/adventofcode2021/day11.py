@@ -31,14 +31,13 @@ def iterate(mx):
     return {'result': iterated, 'flashes': flashes}
 
 
-
 def count_flashes(mx, num_iterations):
     first_full_flash = None
     num_flashes = 0
     for i in itertools.count():
         iterated = iterate(mx)
         mx = iterated['result']
-        if i < 100:
+        if i < num_iterations:
             num_flashes += iterated['flashes']
         if np.all(mx == 0):
             first_full_flash = i + 1
