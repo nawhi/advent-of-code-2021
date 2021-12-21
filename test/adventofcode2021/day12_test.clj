@@ -21,4 +21,10 @@
                              "th"    #{"fi"}
                              "wn"    #{"DG" "XB" "ah" "yw"}
                              "yw"    #{"DG" "MN" "XN"}}
-      )))
+      ))
+  (testing "find all routes through a cave system"
+    (are [graph routes]
+      (is (= (find-routes graph) routes))
+      {"start" #{"end"}} #{["start" "end"]}
+      ))
+  )
