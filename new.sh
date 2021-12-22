@@ -2,7 +2,7 @@
 
 day_num=${1?:pass a day number as first argument}
 cat > test/adventofcode2021/day${day_num}_test.clj << _HERE_
-(ns adventofcode2021.day13-test
+(ns adventofcode2021.day${day_num}-test
   (:require [clojure.test :refer :all]
             [adventofcode2021.day${day_num} :refer :all]
             [adventofcode2021.utils :refer [puzzle-input]]))
