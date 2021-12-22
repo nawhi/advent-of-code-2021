@@ -9,9 +9,9 @@
                     "BB -> N" "BC -> B" "CC -> N" "CN -> C"])
 
 (deftest day14_test
-  (testing "puzzle 1"
+  (testing "polymer insertion simulation"
     (are [template rules expected]
-      (is (= (simulate-pair-insertion template rules) expected))
+      (is (= (simulate-pair-insertion rules template) expected))
       "AB" ["CD -> E"] "AB"
       "AB" ["AB -> E"] "AEB"
       "ABC" ["AB -> E" "BC -> F"] "AEBFC"
@@ -19,4 +19,17 @@
       "NCNBCHB" EXAMPLE-RULES "NBCCNBBBCBHCB"
       "NBCCNBBBCBHCB" EXAMPLE-RULES "NBBBCNCCNBBNBNBBCHBHHBCHB"
       "NBBBCNCCNBBNBNBBCHBHHBCHB" EXAMPLE-RULES "NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB"
-      )))
+      ))
+  (testing "scoring polymer"
+    (are [polymer score]
+      (is (= (score-polymer polymer) score))
+      "HBB" 1
+      "HHHHBB" 2
+      "ABCDEFGHJJJJJJJJJJK" 9
+      ))
+  (testing "puzzle 1 example"
+    (let [input (concat ["NNCB" ""] EXAMPLE-RULES)]
+      (is (= (run-simulation input) 1588))
+      ))
+  (testing "puzzle 1"
+    (is (= 2745 (run-simulation (puzzle-input "14.1"))))))
